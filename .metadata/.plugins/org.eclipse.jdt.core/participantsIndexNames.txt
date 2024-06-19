@@ -1,0 +1,3 @@
+INDEX VERSION 1.134
+D:\0265 DESARROLLO DE APLICACIONES WEB I\Practicas\Plantilla\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\241108014.index
+\Proyecto_ADSII\src\main\java

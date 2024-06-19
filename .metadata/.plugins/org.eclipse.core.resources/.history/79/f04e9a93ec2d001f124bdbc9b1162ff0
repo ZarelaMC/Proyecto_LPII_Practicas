@@ -1,0 +1,511 @@
+<jsp:include page="intranetValida.jsp" />
+<!DOCTYPE html>
+<html lang="esS" >
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Expires" content="-1" />
+<meta http-equiv="Cache-Control" content="private" />
+<meta http-equiv="Cache-Control" content="no-store" />
+<meta http-equiv="Pragma" content="no-cache" />
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="js/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/bootstrapValidator.js"></script>
+<script type="text/javascript" src="js/global.js"></script>
+
+<link rel="stylesheet" href="css/bootstrap.css"/>
+<link rel="stylesheet" href="css/dataTables.bootstrap.min.css"/>
+<link rel="stylesheet" href="css/bootstrapValidator.css"/>
+
+<title>Cliente</title>
+</head>
+<body>
+<jsp:include page="intranetCabecera.jsp" />
+<div class="container" style="margin-top: 4%"><h4>Gestión de Clientes</h4></div>
+
+<div class="container" style="margin-top: 1%">
+	<!------------------------------ Cabecera -->
+	<div class="row" style="height: 70px">
+		<div class="col-md-5" >
+				<input class="form-control" id="id_txt_filtro"  name="filtro" placeholder="Ingrese el nombre y/o apellido" type="text" maxlength="50"/>
+		</div>
+		<div class="col-md-2" >
+			<button type="button" class="btn btn-primary" id="id_btn_filtrar" style="width: 150px;">FILTRA</button>
+		</div>
+		<div class="col-md-2">
+			<button type="button" data-toggle='modal'  data-target="#id_div_modal_registra"  class='btn btn-success' style="width: 150px;">REGISTRA</button>
+		</div>
+	</div>
+	<!------------------------------ Grilla -->
+	<div class="row" > 
+		<div class="col-md-12">
+				<div class="content" >
+					<table id="id_table" class="table table-striped table-bordered" >
+						<thead>
+							<tr>
+								<th style="width: 5%" >Código</th>
+								<th style="width: 34%">Nombres y apellidos</th>					
+								<th style="width: 5%">DNI</th>
+								<th style="width: 6%">Teléfono</th>
+								<th style="width: 15%">Correo electrónico</th>
+								<th style="width: 25%">Dirección / Distrito/ Provincia/ Departamento</th>
+								<th style="width: 10%">Fecha de nacimiento</th>
+							</tr>
+						</thead>
+						</table>
+				</div>	
+		</div>
+	</div>
+	
+</div>
+	
+<!--------------------------------------- MODAL de Registro ----------------------------------------------->
+	<div class="modal fade" id="id_div_modal_registra">
+		<div class="modal-dialog" style="width: 70%">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header" style="padding: 35px 50px">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4><span class="glyphicon glyphicon-ok-sign"></span> Registrar cliente</h4>
+				</div>
+				<div class="modal-body" style="padding: 20px 10px;">
+					<form id="id_form_registra" accept-charset="UTF-8"
+						action="registraVendedor" class="form-horizontal" method="post">
+						<div class="panel-group" id="steps">
+							<!-- Step 1 -->
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title">
+										<a data-toggle="collapse" data-parent="#steps" href="#stepOne">Datos del cliente</a>
+									</h4>
+								</div>
+								<div id="stepOne" class="panel-collapse collapse in">
+									<div class="panel-body">
+										<div class="form-group">
+											<label class="col-lg-3 control-label" for="id_reg_nombres">Nombres</label>
+											<div class="col-lg-8">
+												<input class="form-control" id="id_reg_nombres"
+													name="Nombres" placeholder="Ingrese el nombre"
+													type="text" maxlength="40" />
+											</div>
+										</div>
+													
+										<div class="form-group">
+											<label class="col-lg-3 control-label" for="id_reg_apellidos">Apellidos</label>
+											<div class="col-lg-8">
+												<input class="form-control" id="id_reg_apellidos"
+													name="Apellidos"
+													placeholder="Ingrese los apellidos" type="text"
+													maxlength="50" />
+											</div>
+										</div>
+										<div class="form-group" style="margin-left: 14%">
+											<div class="col-sm-5">
+												<div  class="col-sm-3"><label class="control-label" for="id_reg_dni">DNI</label></div> 
+												<div class="col-sm-9">
+													<input class="form-control" id="id_reg_dni"
+														name="dni" placeholder="Ingrese el DNI"
+														type="text" maxlength="8" />
+												</div>
+											</div>
+											<div class=" col-sm-7">
+												<div  class="col-sm-3"><label class="control-label" for="id_reg_telefono">Teléfono   </label></div>
+												<div class="col-sm-7">
+													<input class="form-control" 
+													id="id_reg_telefono" name="Telefono" placeholder="Ingrese el teléfono"
+														type="text" maxlength="9" />
+												</div>
+										</div>
+										</div>
+										<div class="form-group">
+											<label class="col-lg-3 control-label" for="id_reg_correo">Correo electrónico</label>
+											<div class="col-lg-8">
+												<input class="form-control" id="id_reg_correo"
+													name="Correo" placeholder="Ingrese el correo electrónico"
+													type="email" maxlength="40" />
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-lg-3 control-label" for="id_reg_direccion">Dirección</label>
+											<div class="col-lg-8">
+												<input class="form-control" id="id_reg_direccion"
+													name="Direccion" placeholder="Ingrese la  dirección"
+													type="text" maxlength="60" />
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-lg-3 control-label" for="id_reg_departamento">Departamento</label>
+											<div class="col-lg-8">
+												<select id="id_reg_departamento" name="Departamento" class='form-control'>
+													<option value=" ">[Seleccione]</option>
+												</select>
+											</div>
+										</div>
+										<div class="form-group" style="margin-left: 4%">
+											<div class="col-sm-6">
+												<label class="col-lg-3 control-label" for="id_reg_provincia">Provincia</label>
+												<div class="col-lg-8">
+													<select id="id_reg_provincia" name="Provincia" class='form-control'>
+														<option value=" ">[Seleccione]</option>
+													</select>
+												</div>
+											</div>
+											<div class="col-sm-6">
+												<label class="col-lg-3 control-label" for="id_reg_distrito">Distrito</label>
+												<div class="col-lg-8">
+													<select id="id_reg_distrito" name="Distrito" class='form-control'>
+														<option value=" ">[Seleccione]</option>
+													</select>
+												</div>
+											</div>
+										</div>
+										<div class="form-group" style="margin-left: 5%">
+											<div class="col-sm-6">
+												<label class="col-lg-3 control-label" for="id_reg_genero">Género</label>
+												<div class="col-lg-8">
+													<select id="id_reg_genero" name="Genero" class='form-control' >
+														<option value=" ">[Seleccione]</option>
+														<option value="Masculino">Masculino</option>
+														<option value="Femenino">Femenino</option>
+													</select>
+												</div>
+											</div>
+											<div class="col-sm-6" >
+												<label class="col-lg-3 control-label"
+													for="id_reg_fechaNacimiento">Fecha de Nacimiento</label>
+												<div class="col-lg-8">
+													<input class="form-control" id="id_reg_fechaNacimiento"
+														name="fechaNacimiento" type="date"/>
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<div>
+												<button type="button" class="btn btn-primary  col-lg-offset-5"
+													id="id_btn_registra">REGISTRA</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</form>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+<script type="text/javascript">
+//--------------------- Mostrar datos en grilla al cargar
+$(document).ready(function() {
+	$.getJSON("consultaRegistroCliente",{"filtro":""}, function (listaClient){
+		agregarGrilla(listaClient);
+	});
+});
+
+//------------------------ cbo Departamento ---------------------------
+$.getJSON("listaDepartamento", {}, function(data){
+	$.each(data, function(i,item){
+		$("#id_reg_departamento").append("<option value="+item.idDepartamento +">"+ item.nombre +"</option>");
+	});
+});
+
+//------------------------ cbo Provincia ---------------------------
+//Capturar el evento de cambio en el departamento seleccionado
+$("#id_reg_departamento").change(function() {
+    var selectedDepartamento = $(this).val();
+    
+    // Limpiar y deshabilitar la lista de provincias
+    $("#id_reg_provincia").empty().append("<option value=''>[Seleccione]</option>").prop("disabled", true);
+
+    // Si se seleccionó un departamento, cargar las provincias correspondientes
+    if (selectedDepartamento) {
+        $.getJSON("listaProvincia", { idDepartamento: selectedDepartamento }, function(data) {
+            $.each(data, function(i, item) {
+                $("#id_reg_provincia").append(
+                    "<option value=" + item.idProvincia + ">" + item.nombre + "</option>"
+                );
+            });
+
+            // Habilitar la lista de provincias después de cargarlas
+            $("#id_reg_provincia").prop("disabled", false);
+        });
+    }
+});
+
+//------------------------ cbo Distrito ---------------------------
+//Capturar el evento de cambio en el provincia seleccionado
+$("#id_reg_provincia").change(function() {
+    var selectedProvincia = $(this).val();
+    
+    // Limpiar y deshabilitar la lista de distritos
+    $("#id_reg_distrito").empty().append("<option value=''>[Seleccione]</option>").prop("disabled", true);
+
+    // Si se seleccionó un departamento, cargar las provincias correspondientes
+    if (selectedProvincia) {
+        $.getJSON("listaDistrito", { idProvincia: selectedProvincia }, function(data) {
+            $.each(data, function(i, item) {
+                $("#id_reg_distrito").append(
+                    "<option value=" + item.idDistrito + ">" + item.nombre + "</option>"
+                );
+            });
+
+            // Habilitar la lista de provincias después de cargarlas
+            $("#id_reg_distrito").prop("disabled", false);
+        });
+    }
+});
+
+//------------------------ btn FILTRAR ---------------------------
+function agregarGrilla(listaClient){
+	 $('#id_table').DataTable().clear();
+	 $('#id_table').DataTable().destroy();
+	 $('#id_table').DataTable({
+			data: listaClient,
+			searching: false,
+			ordering: true,
+			processing: true,
+			pageLength: 5,
+			lengthChange: false,
+			columns:[
+				{data: "idCliente"},
+				{
+	                data: null,
+	                render: function(data, type, row) {
+	                    return row.nombres + " " + row.apellidos;
+	                }
+	            },
+				{data: "dni"},				
+				{data: "telefono"}, 
+				{data: "correo"},
+				{
+	                data: null,
+	                render: function(data, type, row) {
+	                    return row.direccion + ", " + row.distrito.nombre + ", " + row.provincia.nombre + ", " + row.departamento.nombre;
+	                }
+	            },	
+				{data: "fechaNacimiento"},											
+			]                                     
+	    });
+}
+
+//------------------------ btn FILTRAR ---------------------------
+$("#id_btn_filtrar").click(function(){
+	var fil=$("#id_txt_filtro").val();
+	$.getJSON("consultaRegistroCliente",{"filtro":fil}, function (listaClient){
+		agregarGrilla(listaClient);
+	});
+});
+
+//------------------------ botón REGISTRAR ------------------------
+$("#id_btn_registra").click(function(){
+	var validator = $('#id_form_registra').data('bootstrapValidator');
+    validator.validate();
+	
+    if (validator.isValid()) {
+        $.ajax({
+          type: "POST",
+          url: "registraCliente", 
+          data: $('#id_form_registra').serialize(),
+          success: function(data){
+        	  agregarGrilla(data.listaCli); //'lista' viene de la "lista" creada en el Controller
+        	  $('#id_div_modal_registra').modal("hide");
+        	  mostrarMensaje(data.mensaje);
+        	  limpiarFormularioRegistro();
+        	  validator.resetForm();
+          },
+          error: function(){
+        	  mostrarMensaje(MSG_ERROR);
+          }
+        });
+        
+    }
+});
+
+function limpiarFormularioRegistro(){
+	$('#id_reg_nombres').val('');           
+	$('#id_reg_apellidos').val('');
+	$('#id_reg_dni').val('');
+	$('#id_reg_telefono').val('');
+	$('#id_reg_correo').val('');
+	$('#id_reg_direccion').val('');
+	$('#id_reg_departamento').val('');
+	$('#id_reg_provincia').val('');
+	$('#id_reg_distrito').val('');
+	
+};
+
+//---------- Validaciones Model Registra ----------------------
+$(document).ready(function() {
+    $('#id_form_registra').bootstrapValidator({
+        message: 'This value is not valid',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+        		Nombres:{
+                    selector: "#id_reg_nombres",
+                    validators:{
+                        notEmpty: {
+                             message: 'El nombre es obligatorio'
+                        },
+                        stringLength: {
+                            min: 3,
+                            max: 50,
+                            message: 'El nombre es de 3 a 50 caracteres'
+                        },
+                        regexp: {
+                            regexp: /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/, 
+                            message: 'Ingresar nombre con caracteres alfabéticos'
+                        },
+                        
+                    }
+                },
+                Apellidos:{
+                    selector: "#id_reg_apellidos",
+                    validators:{
+                        notEmpty: {
+                             message: 'Los apellidos son obligatorios'
+                        },
+                        stringLength: {
+                            min: 3,
+                            max: 50,
+                            message: 'Los apellidos es de 3 a 50 caracteres'
+                        },
+                        regexp: {
+                            regexp: /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/, 
+                            message: 'Ingresar apellidos con caracteres alfabéticos'
+                        },
+                    }
+                },
+                Direccion:{
+                    selector: "#id_reg_direccion",
+                    validators:{
+                        notEmpty: {
+                             message: 'La dirección es obligatoria'
+                        },
+                        stringLength: {
+                            min: 5,
+                            max: 100,
+                            message: 'La dirección es de 5 a 100 caracteres'
+                        },
+                        regexp: {
+                            regexp: /^[\da-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[\da-zA-ZÀ-ÿ\u00f1\u00d1]*)*[\da-zA-ZÀ-ÿ\u00f1\u00d1]+$/, 
+                            message: 'Ingresar dirección con caracteres correctos (evitar -_/) '
+                        },
+                    }
+                },
+                Telefono:{
+                    selector: "#id_reg_telefono",
+                    validators:{
+                        notEmpty: {
+                             message: 'El teléfono es obligatorio'
+                        },
+                        stringLength: {
+                        	min: 9,
+                            max: 9,
+                            message: 'El teléfono es de 9 dígitos'
+                        },
+                        regexp: {
+                            regexp: /^[0-9]+$/,
+                            message: 'Ingresar teléfono con caracteres numéricos'
+                        }
+                    }
+                },
+                dni:{
+                    selector: "#id_reg_dni",
+                    validators:{
+                        notEmpty: {
+                             message: 'El DNI es obligatorio'
+                        },
+                        stringLength: {
+                        	max: 8,
+                        	min: 8,
+                            message: 'El DNI es de 8 dígitos'
+                        },
+                        regexp: {
+                            regexp: /^[0-9]+$/,
+                            message: 'Ingresar DNI con caracteres numéricos'
+                        },
+                        remote: {
+                            delay: 100,
+                            url: 'buscaPorDni_Existente', 
+                            message: 'El DNI ya existe'
+                            }
+                    	}
+                },
+                Correo:{
+                    selector: "#id_reg_correo",
+                    validators:{
+                        notEmpty: {
+                             message: 'El correo es obligatorio'
+                        },
+                        emailAddress: {
+                            message: 'El correo no es válido'
+                        },
+                        regexp: {
+                            regexp: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+                            message: 'Ingresar un correo válido'
+                        }
+                    }
+                },
+                fechaNacimiento:{
+                    selector: "#id_reg_fechaNacimiento",
+                    validators:{
+                        notEmpty: {
+                             message: 'La fecha de nacimiento es obligatoria'
+                        },
+                        remote :{
+                        	delay   : 100,
+                        	url     : 'validaClienteEdad',
+                        	message : 'El cliente debe tener mínimo 12 años de edad'
+                        }
+                    }
+                },
+                Departamento:{
+                    selector: "#id_reg_departamento",
+                    validators:{
+                        notEmpty: {
+                             message: 'El departamento es obligatorio'
+                        }
+                    }
+                },
+                Provincia:{
+                    selector: "#id_reg_provincia",
+                    validators:{
+                        notEmpty: {
+                             message: 'La provincia es obligatoria'
+                        }
+                    }
+                },
+                Distrito:{
+                    selector: "#id_reg_distrito",
+                    validators:{
+                        notEmpty: {
+                             message: 'El distrito es obligatorio'
+                        }
+                    }
+                },
+                Genero:{
+                    selector: "#id_reg_genero",
+                    validators:{
+                        notEmpty: {
+                             message: 'El género es obligatorio'
+                        }
+                    }
+                }             
+        }   
+    });
+});
+</script>   		
+</body>
+</html>

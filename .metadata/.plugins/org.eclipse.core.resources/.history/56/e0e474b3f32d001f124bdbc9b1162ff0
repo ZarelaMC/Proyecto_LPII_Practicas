@@ -1,0 +1,10 @@
+package com.centroinformacion.service;
+
+import java.util.List;
+
+import com.centroinformacion.entity.Departamento;
+
+public interface  DepartamentoService {
+	//Listar a todos los departamentos e n cbo
+	public abstract List<Departamento> listarTodosDepartamentos();
+}

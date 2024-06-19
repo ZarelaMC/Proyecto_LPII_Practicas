@@ -1,0 +1,16 @@
+package com.centroinformacion.service;
+
+import java.util.List;
+import com.centroinformacion.entity.Cliente;
+
+public interface ClienteService {
+	public abstract List<Cliente> listaClientes();
+	public abstract List<Cliente> findByOrderByNombresAsc();
+	public abstract List<Cliente> listarPorNomOApeSegunFiltro(String filtro);
+	
+	public abstract Cliente registrarCliente(Cliente obj);
+	
+	
+	public abstract List<Cliente> clienteDniExistente(String dni);
+	//public abstract List<Cliente> clienteNombresYApellidosExistentes(String nombres, String apellidos);
+}

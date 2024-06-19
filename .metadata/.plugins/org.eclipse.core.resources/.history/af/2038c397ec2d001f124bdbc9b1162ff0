@@ -1,0 +1,100 @@
+package com.centroinformacion.controller;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.collections.CollectionUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.centroinformacion.entity.Cliente;
+import com.centroinformacion.service.ClienteService;
+import com.centroinformacion.util.FunctionUtil;
+  
+
+@Controller
+public class ClienteRegistroController {
+	@Autowired
+	private ClienteService clienteService;
+	
+	@GetMapping(value = "/verRegistroCliente")
+	public String verMantenimientoProducto(){
+		return "registroCliente";
+	}
+	
+	@GetMapping(value = "/verRegistroVenta")
+	public String verRegistrarVenta(){
+		return "generarVenta";
+	}
+	
+	@GetMapping("/listaClient")
+	@ResponseBody
+	public List<Cliente> listaProduct() {
+		return clienteService.listaClientes();
+	}
+	
+
+	/** -------------- Traer lista según FILTRO ingresado -------------- **/
+	@ResponseBody
+	@GetMapping(value = "/consultaRegistroCliente")
+	public List<Cliente> consulta(String filtro){
+		return clienteService.listarPorNomOApeSegunFiltro("%" + filtro + "%");
+	}
+	
+	/** -------------- Método REGISTRA -------------- **/
+	@PostMapping("/registraCliente")
+	@ResponseBody
+	public Map<?, ?> registra(Cliente obj) {
+		HashMap<String, Object> map = new HashMap<String, Object>(); 
+		
+		Cliente objSalida = clienteService.registrarCliente(obj);
+		if (objSalida == null) {
+			map.put("mensaje", "Error en el registro");
+		} else {
+			List<Cliente> lista = clienteService.listarPorNomOApeSegunFiltro("%");
+			map.put("listaCli", lista);
+			map.put("mensaje", "Registro exitoso");
+		}
+		return map;
+	}
+	
+	/** -------------- Buscar DNI existente -------------- **/
+	@GetMapping("/buscaPorDni_Existente")
+	@ResponseBody
+	public String buscaClientePorDni(String dni) {
+		List<Cliente> listaPorDni = clienteService.clienteDniExistente(dni);
+		if (CollectionUtils.isEmpty(listaPorDni)) {
+			return "{\"valid\" : true }";
+		} else {
+			return "{\"valid\" : false }";
+		}
+	}
+	
+	/** -------------- Validar FechaNacimiento -------------- **/
+	@GetMapping("/validaClienteEdad")
+	@ResponseBody
+	public String validaFecha(String fechaNacimiento) {
+		if(FunctionUtil.isMayor12Años(fechaNacimiento)) {
+			return "{\"valid\":true}";
+		}else {
+			return "{\"valid\":false}";
+		}
+	}
+	
+	
+	/** -------------- Buscar NOMBRES y APELLIDOS existente -------------- **/
+	//Posibilidad de omónimos
+	/*@GetMapping("/buscaPorNombresApellidos_Existente")
+	@ResponseBody
+	public String buscaPorNombresApellidos(String nombres, String apellidos) {
+		List<Cliente> listaPorNomApe = clienteService.clienteNombresYApellidosExistentes(nombres, apellidos);
+		if (CollectionUtils.isEmpty(listaPorNomApe)) {
+			return "{\"valid\" : true }";
+		} else {
+			return "{\"valid\" : false }";
+		}
+	}*/
+}

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<list key="EGit.KnownHosts">
+		<item value="bitbucket.org"/>
+		<item value="git.eclipse.org"/>
+		<item value="github.com"/>
+	</list>
+	<list key="RepositorySelectionPage.UsedUris">
+		<item value="https://github.com/ZarelaMC/Proyecto_ADSII.git"/>
+	</list>
+	<section name="org.eclipse.egit.ui.internal.staging.StagingView">
+		<item key="MAIN_SASH_FORM_ORIENTATION_VERTICAL" value="false"/>
+		<item key="HORIZONTAL_SASH_FORM_WEIGHT" value="200,200"/>
+		<item key="STAGING_SASH_FORM_WEIGHT" value="200,200"/>
+		<item key="sortItemState" value="false"/>
+	</section>
+	<section name="GitCommitMessageComponent">
+		<list key="C:\Users\HP\git\Proyecto_ADSII\.git">
+			<item value="false"/>
+			<item value="ZarelaMC &lt;zarelamanrique87@gmail.com&gt;"/>
+			<item value="&#x0D;&#x0A;&#x0D;&#x0A;Signed-off-by: ZarelaMC &lt;zarelamanrique87@gmail.com&gt;"/>
+			<item value="ZarelaMC &lt;zarelamanrique87@gmail.com&gt;"/>
+			<item value="309c2ea68f945fbfa13cbd7d3fc3677c8c385d73"/>
+			<item value="0"/>
+			<item value="true"/>
+			<item value=""/>
+		</list>
+	</section>
+	<section name="CommitSelectionDialogSection">
+		<item key="ShowStatusLine" value="true"/>
+		<item key="History" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#x0D;&#x0A;&lt;History/&gt;"/>
+		<section name="DialogBoundsSettings">
+			<item key="DIALOG_HEIGHT" value="500"/>
+			<item key="DIALOG_WIDTH" value="600"/>
+			<item key="DIALOG_X_ORIGIN" value="391"/>
+			<item key="DIALOG_Y_ORIGIN" value="39"/>
+			<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
+		</section>
+	</section>
+	<section name="GitCommitSearchPage">
+		<item key="HISTORY_SIZE" value="0"/>
+	</section>
+	<section name="org.eclipse.egit.ui.internal.dialogs.RebaseTargetSelectionDialog.dialogBounds">
+		<item key="DIALOG_X_ORIGIN" value="422"/>
+		<item key="DIALOG_Y_ORIGIN" value="18"/>
+		<item key="DIALOG_WIDTH" value="538"/>
+		<item key="DIALOG_HEIGHT" value="532"/>
+		<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
+	</section>
+</section>

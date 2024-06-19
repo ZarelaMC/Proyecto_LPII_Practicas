@@ -1,0 +1,22 @@
+package com.centroinformacion.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.centroinformacion.entity.UsuarioA;
+import com.centroinformacion.repository.UsuarioARepository;
+
+@Service
+public class UsuarioAServiceImpl implements UsuarioAService{
+	
+	@Autowired	
+	private UsuarioARepository usuarioArepository;
+
+	@Override
+	public List<UsuarioA> listPorNombreYApellidoLike(String filtro) {
+		return usuarioArepository.listPorNombreYApellidoLike(filtro);
+	}
+
+}

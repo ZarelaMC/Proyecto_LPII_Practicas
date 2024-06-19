@@ -1,0 +1,9 @@
+package com.centroinformacion.service;
+
+import java.util.List;
+
+import com.centroinformacion.entity.Distrito;
+
+public interface DistritoService {
+	public abstract List<Distrito> listarTodosLosDistritosXProvincia(int idProvincia);
+}

@@ -1,0 +1,102 @@
+package com.centroinformacion.entity;
+
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@Entity
+@Table(name = "TB_Usuario")
+@AllArgsConstructor
+@NoArgsConstructor
+public class UsuarioA {
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID_Usuario")
+    private int idUsuario;
+
+    @Column(name = "Nombres")
+    private String nombres;
+
+    @Column(name = "Apellidos")
+    private String apellidos;
+
+    @Column(name = "DNI")
+    private int dni;
+
+    @Column(name = "Telefono")
+    private String telefono;
+
+    @Column(name = "Correo")
+    private String correo;
+
+    @Column(name = "Direccion")
+    private String direccion;
+
+    @Temporal(TemporalType.DATE)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "America/Lima")
+    @Column(name = "Fecha_Nacimiento")
+    private Date fechaNacimiento;
+
+    @Column(name = "Genero")
+    private int genero;
+
+    @Column(name = "login")
+    private String login;
+
+    @Column(name = "password")
+    private String password;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "Id_Rol")
+    @JsonIgnore
+    private RolA rolA;
+
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_Departamento")
+    private Departamento departamento;
+
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_Provincia")
+    private Provincia provincia;
+
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_Distrito")
+	private Distrito distrito;
+	
+    @Column(name = "Estado")
+    private int estado;
+
+    @Temporal(TemporalType.DATE)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "America/Lima")
+    @Column(name = "Fecha_Registro")
+    private Date fechaRegistro;
+
+    @Temporal(TemporalType.DATE)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "America/Lima")
+    @Column(name = "Fecha_Actualizacion")
+    private Date fechaActualizacion;
+	
+}

@@ -1,0 +1,33 @@
+package com.centroinformacion.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.centroinformacion.entity.UsuarioA;
+import com.centroinformacion.service.UsuarioAService;
+
+@Controller
+public class VendedorCrudController {
+
+	 
+	
+	@Autowired
+	private UsuarioAService usuarioService;
+	
+	@GetMapping("/verMantenerVendedor")
+	public String verMantener() {
+		return "MantenimientoVendedor";
+	}
+	
+	@ResponseBody
+	@GetMapping("/consultaCrudVendedor")
+	public List<UsuarioA> consulta(String filtro){
+		 List<UsuarioA> lstSalida = usuarioService.listPorNombreYApellidoLike("%"+filtro+"%");
+		 return lstSalida;
+	}
+	
+}

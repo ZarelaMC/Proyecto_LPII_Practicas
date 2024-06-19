@@ -1,0 +1,81 @@
+package com.centroinformacion.entity;
+
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@Entity
+@Table(name = "TB_Cliente")
+@AllArgsConstructor
+@NoArgsConstructor
+public class Cliente {
+	@Id 
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "Id_Cliente")
+	private int idCliente;
+	
+	@Column(name = "Nom_Cliente")
+	private String nombres;
+	
+	@Column(name = "Ape_Cliente")
+	private String apellidos;
+	
+	@Column(name = "DNI")
+	private String dni;
+	
+	@Column(name = "Genero")
+	private String genero;
+	
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern ="yyyy-MM-dd")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	@Column(name = "Fecha_Nacimiento")
+	private Date fechaNacimiento;
+	
+	@Column(name = "Telefono")
+	private String telefono;
+	
+	@Column(name = "Direccion")
+	private String direccion;
+	
+	@Column(name = "Correo")
+	private String correo;
+	
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_Departamento")
+	private Departamento departamento;
+
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_Provincia")
+    private Provincia provincia;
+
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID_Distrito")
+    private Distrito distrito;
+	
+
+}

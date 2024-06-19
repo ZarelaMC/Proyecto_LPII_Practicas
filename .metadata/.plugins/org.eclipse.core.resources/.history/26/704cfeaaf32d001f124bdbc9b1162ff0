@@ -1,0 +1,13 @@
+package com.centroinformacion.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import com.centroinformacion.entity.UsuarioA;
+
+public interface UsuarioARepository extends JpaRepository<UsuarioA, Integer>{
+    @Query("select u from UsuarioA u WHERE (u.nombres LIKE ?1 OR u.apellidos LIKE ?1) AND u.rolA.idRol = 1")
+	public List<UsuarioA> listPorNombreYApellidoLike(String filtro);
+}

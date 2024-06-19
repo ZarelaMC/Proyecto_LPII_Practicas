@@ -1,0 +1,20 @@
+package com.centroinformacion.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import com.centroinformacion.entity.Cliente;
+
+public interface ClienteRepository extends JpaRepository<Cliente, Integer>{
+	public abstract List<Cliente> findByOrderByNombresAsc();
+	
+	@Query("select a from Cliente a where a.nombres like ?1 or a.apellidos like ?1")
+	public List<Cliente> listaPorNombresOApellidos(String filtro);
+	
+	public List<Cliente> findByDniIgnoreCase(String dni);
+	
+	@Query("select a from Cliente a where a.nombres like ?1 and a.apellidos like ?2")
+	public List<Cliente> encuentraPorNombresApellidosExistentes(String nombres, String apellidos);
+}

@@ -1,0 +1,50 @@
+package com.centroinformacion.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.centroinformacion.entity.Cliente;
+import com.centroinformacion.repository.ClienteRepository;
+
+@Service
+public class ClienteServiceImpl implements ClienteService{
+
+	@Autowired
+	private ClienteRepository repository;
+
+	@Override
+	public List<Cliente> listaClientes() {
+		return repository.findByOrderByNombresAsc();
+	}
+
+	@Override
+	public List<Cliente> findByOrderByNombresAsc() {
+		return repository.findByOrderByNombresAsc();
+	}
+
+	@Override
+	public List<Cliente> listarPorNomOApeSegunFiltro(String filtro) {
+		return repository.listaPorNombresOApellidos(filtro);
+	}
+
+	@Override
+	public Cliente registrarCliente(Cliente obj) {
+		return repository.save(obj);
+	}
+
+	@Override
+	public List<Cliente> clienteDniExistente(String dni) {
+		return repository.findByDniIgnoreCase(dni);
+	}
+
+	/*
+	@Override
+	public List<Cliente> clienteNombresYApellidosExistentes(String nombres, String apellidos) {
+		return repository.encuentraPorNombresApellidosExistentes(nombres, apellidos);
+	}*/
+	
+	
+
+}

@@ -1,0 +1,23 @@
+package com.centroinformacion.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.centroinformacion.entity.Distrito;
+import com.centroinformacion.repository.DistritoRepository;
+
+@Service
+public class DistritoServiceImpl implements DistritoService{
+
+	@Autowired
+	private DistritoRepository distritoRepository;
+
+	@Override
+	public List<Distrito> listarTodosLosDistritosXProvincia(int idProvincia) {
+		return distritoRepository.findByIdProvincia(idProvincia);
+	}
+
+	
+}
